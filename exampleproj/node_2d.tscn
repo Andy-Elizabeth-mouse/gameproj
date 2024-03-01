@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://crlsrhqocl42r"]
+
+[ext_resource type="Script" path="res://click.gd" id="1_bbydt"]
+[ext_resource type="Script" path="res://refresh.gd" id="2_06lfb"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 130.0
+offset_top = 191.0
+offset_right = 419.0
+offset_bottom = 480.0
+script = ExtResource("1_bbydt")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 582.0
+offset_top = 257.0
+offset_right = 744.0
+offset_bottom = 419.0
+script = ExtResource("2_06lfb")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
