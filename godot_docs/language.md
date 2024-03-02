@@ -220,7 +220,17 @@ GDScript和Python主要有以下几点不同：
 
 20. 不支持多重继承（一个类继承多个父类）。
 
-21. getter/setter
+21. 类的实例化方式不同。
+    python:
+    ```python
+    a = SomeClass()
+    ```
+    gdscript:
+    ```gdscript
+    var a = SomeClass.new()
+    ```
+
+22. getter/setter
     python中没有getter/setter的概念。
     getter/setter可以在变量被读取或者写入的时候执行一些操作。可以看作是给变量的读取和写入分别定义了一个函数。
     gdscript:
@@ -269,7 +279,7 @@ GDScript和Python主要有以下几点不同：
     ```
     有关getter/setter的详细内容可以参考[官方文档](https://docs.godotengine.org/zh-cn/4.x/tutorials/scripting/gdscript/gdscript_basics.html#properties-setters-and-getters)。
 
-22. GDScript中新增`signal`关键字用于声明信号。
+23. GDScript中新增`signal`关键字用于声明信号。
     “信号”于其他语言中的“事件”类似，用于在某些条件下通知其他对象。
     声明信号的语法如下：
     ```gdscript
@@ -294,9 +304,9 @@ GDScript和Python主要有以下几点不同：
     ```
     有关信号的详细内容可以参考[官方文档](https://docs.godotengine.org/zh-cn/4.x/tutorials/scripting/gdscript/gdscript_basics.html#signals)和[信号专题](./signal.md)。
 
-23. GDScript中没有`with`关键字。
+24. GDScript中没有`with`关键字。
 
-24. **GDScript中没有`try...except...finally`语句！**
+25. **GDScript中没有`try...except...finally`语句！**
     官方对此的解释：
     > 我们相信无论如何游戏都不应该崩溃。如果发生意外情况，Godot将打印一个错误（甚至可以追溯到脚本），但之后它会尽可能优雅地恢复，并继续前进。
     >
@@ -306,7 +316,7 @@ GDScript和Python主要有以下几点不同：
     
     参见官方文档中的[为什么Godot不使用异常](https://docs.godotengine.org/zh-cn/3.x/about/faq.html#why-does-godot-not-use-exceptions)。
 
-25. GDScript中的`assert`语句的使用方式不同。
+26. GDScript中的`assert`语句的使用方式不同。
     在上面一条中提到了Godot不使用异常，但是我们可以在调试过程中使用`assert`语句来检查某些条件是否满足。
     在非调试模式下，`assert`语句会被忽略。
     python中的`assert`语句：
@@ -317,5 +327,25 @@ GDScript和Python主要有以下几点不同：
     ```gdscript
     assert(some_condition, "some message")
     ```
+
+27. `await`关键字的使用方式不同，而且没有`async`关键字。
+    和`yield`一样，`await`被削了，只能用于协程。
+    [协程](https://zh.wikipedia.org/wiki/%E5%8D%8F%E7%A8%8B)和多线程可不同，协程像多线程，但是其本质只是暂停\~恢复\~，不会并行执行。
+    使用协程的例子：
+    ```gdscript
+    func wait_confirmation():
+        print("Prompting user")
+        await $Button.button_up # Waits for the button_up signal from Button node.
+        print("User confirmed")
+        return true
+    func request_confirmation():
+        print("Will ask the user")
+        var confirmed = await wait_confirmation()
+        if confirmed:
+            print("User confirmed")
+        else:
+            print("User cancelled")
+    ```
+    有关`await`的详细内容可以参考[官方文档](https://docs.godotengine.org/zh-cn/4.x/tutorials/scripting/gdscript/gdscript_basics.html#awaiting-for-signals-or-coroutines)
 
 唔...我能想到/查到的就这些了 (´・ω・`)

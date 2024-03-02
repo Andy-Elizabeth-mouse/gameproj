@@ -1,5 +1,10 @@
 extends RichTextLabel
 
-func _process(_delta):
-	var go = get_node("../Button")
-	text = str(go.count)
+var count = 0
+
+func _ready():
+	self.text = "0"
+
+func _on_pressed():
+	count += 1
+	self.text = str(count)

@@ -7,4 +7,8 @@ by [撒碧](https://github.com/Andy-Elizabeth-mouse/)
 1. [简单介绍](./overview.md)
 2. [环境配置](./build_env.md)
 3. [GDScript语法介绍 (与python的区别)](./language.md)
-4. 
+4. [节点](./node.md)
+5. [信号](./signal.md)
+6. 
+7. 
+
